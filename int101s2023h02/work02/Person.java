@@ -9,22 +9,15 @@ public class Person {
     private String lastname;
    
     public  Person(String firstname, String lastname) {
-        if(Utilitor.testString(firstname) && Utilitor.testString(lastname) ){
+        
         this.firstname = Utilitor.testString(firstname);
         this.lastname = Utilitor.testString(lastname);
         this.id = nextid;
         nextid++;
-        }else{
-            throw new IllegalArgumentException("Invalid firstname or lastname");
-        }
+        
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Person(").append(id).append(",").append(firstname).append(",").append(lastname).append(")");
-        return sb.toString();
-    }
+    
 
     public int getId() {
         return id;
@@ -39,36 +32,53 @@ public class Person {
     }
 
     public void setFirstname(String firstname) {
-        if(Utilitor.testString(firstname)){
-            this.firstname = firstname;
-        }else{
-            throw new IllegalArgumentException("Invalid firstname");
-        }
+            this.firstname = Utilitor.testString(firstname);
+       
         
     }
 
     public void setLastname(String lastname) {
-        if(Utilitor.testString(lastname)){
-            this.lastname = lastname;
-        }else{
-            throw new IllegalArgumentException("Invalid lastname");
-        }
+       
+            this.lastname =Utilitor.testString(lastname) ;
+       
         
     }
 
-    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Person {");
+        sb.append("id = ").append(this.id);
+        sb.append(", fistname = ").append(this.firstname);
+        sb.append(", lastname = ").append(this.lastname);
+        sb.append("}");
+        return sb.toString();
+    }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; 
-        }
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Person other = (Person) obj;
-        return id == other.id;
+        if (id != other.id)
+            return false;
+        if (firstname == null) {
+            if (other.firstname != null)
+                return false;
+        } else if (!firstname.equals(other.firstname))
+            return false;
+        if (lastname == null) {
+            if (other.lastname != null)
+                return false;
+        } else if (!lastname.equals(other.lastname))
+            return false;
+        return true;
     }
+
     
     
 

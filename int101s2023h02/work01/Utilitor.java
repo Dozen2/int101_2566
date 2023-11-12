@@ -18,26 +18,28 @@ public class Utilitor {
         if (isbn10 <=0) {
             throw new IllegalArgumentException("this cannot be negative");
         }
-        
         int count = 0;
-        int product = 2;
+        long currentIsbn10 = isbn10;
+        while (isbn10 != 0) {
+            count++;
+            isbn10 /= 10;
+        }
+        if (count != 9) {
+            throw new IllegalArgumentException();
+        }
+
         long result = 0;
-        while (isbn10 !=0) {
-             result += (count % 10)* product;
-             isbn10 /= 10;
-             count++;
-             product++;
+        for (int i = 2; i <= 10; i++) {
+            long digit = currentIsbn10 % 10;
+            result += digit * i;
+            currentIsbn10 /= 10;
         }
-        if (count != 9){
-            throw new  IllegalArgumentException();
-        }
-        System.out.println(result);
-        long finalResult = result % 11;
-        if (finalResult < 2) {
+        if (result % 11 == 0 || result % 11 == 1) {
             return 0;
         }
-        return 11 - finalResult;
+        return 11 - (result % 11);
+    }
     }
     
     
-}
+

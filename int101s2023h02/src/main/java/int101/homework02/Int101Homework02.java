@@ -13,8 +13,12 @@ public class Int101Homework02 {
     static void work01Utilitor() {
       
 
-      long result = Utilitor.computeIsbn10(495937129);
-      System.out.println("The result = " + result);
+        System.out.println("<<<< 1.2 >>>>");
+        System.out.println(Utilitor.testString("Kei"));
+        System.out.println("<<<< 1.3 >>>>");
+        System.out.println(Utilitor.computeIsbn10(645372816));
+        System.out.println("<<<< 1.4 >>>>");
+        System.out.println(Utilitor.testPositive(50.5));
         /*
        1.1 Create a public utility class named "Utilitor" in package named "work01".
        1.2 Create a public method named "testString" in "Utilitor" class.
@@ -39,18 +43,22 @@ public class Int101Homework02 {
 
     static void work02Person() {
        
-        Person person1 = new Person("Dozen2", "Kei");
-        Person person2 = new Person("Zerist", "Fistiro");
-
-        System.out.println(person1.toString());
-        System.out.println(person2.toString());
-
-        person1.setFirstname("DZ");
-        person1.setLastname("K");
-       
-        System.out.println("Are person1 and person2 the same? " + person1.equals(person2));
-        System.out.println("Are person1 and person1 the same? " + person1.equals(person1));
-       
+        Person p1 = new Person("Thanakorn", "Phosupsook");
+        Person p2 = new Person("what", "the fck");
+        Person p3 = new Person("Hello", "World");
+        System.out.println("<<<< 2.6 , 2.7 >>>>");
+        System.out.println(p1);
+        System.out.println(p2);
+        System.out.println(p3);
+        System.out.println("<<<< 2.8 >>>>");
+        System.out.println(p1.getFirstname());
+        System.out.println("<<<< 2.9 >>>>");
+        p2.setFirstname("welllll");
+        p2.setLastname("hiiiii");
+        System.out.println(p2.getFirstname());
+        System.out.println(p2.getLastname());
+        System.out.println("<<<< 2.10 >>>>");
+        System.out.println(p1.equals(p3));
         /*
        2.1 Create a public class named "Person" in package named "work02".
            This class contains the following fields and methods.
@@ -81,27 +89,31 @@ public class Int101Homework02 {
 
     static void work03Account() {
        
-        Person person1 = new Person("Korn", "Pho");
-        Person person2 = new Person("Tora", "Kananri");
-
-        Account account1 = new Account(person1);
-        Account account2 = new Account(person2);
-
-        System.out.println(account1.toString());
-        System.out.println(account2.toString());
-
-        account1.deposit(1000.0);
-        System.out.println("New balance for account1: " + account1.getBalance());
-
-        account1.withdraw(500.0);
-        System.out.println("New balance for account1 after withdrawal: " + account1.getBalance());
-
-        account1.transfer(200.0, account2);
-        System.out.println("New balance for account1 after transfer: " + account1.getBalance());
-        System.out.println("New balance for account2 after transfer: " + account2.getBalance());
-
-        System.out.println("Are account1 and account2 the same? " + account1.equals(account2));
-        System.out.println("Are account1 and account1 the same? " + account1.equals(account1));
+        Person p1 = new Person("Thanakorn", "Phosupsook");
+        Person p2 = new Person("what", "the fck");
+        Person p3 = new Person("welllll", "hiiiii");
+        Account a1 = new Account(p1);
+        Account a2 = new Account(p2);
+        Account a3 = new Account(p3);
+        System.out.println("<<<< 3.6, 3.11 >>>>");
+        System.out.println(a1);
+        System.out.println(a2);
+        System.out.println(a3);
+        System.out.println("<<<< 3.7 >>>>");
+        System.out.println(a1.getNo());
+        System.out.println(a1.getOwner());
+        System.out.println(a1.getBalance());
+        System.out.println("<<<< 3.8 >>>>");
+        a1.deposit(10000);
+        System.out.println(a1);
+        System.out.println("<<<< 3.9 >>>>");
+          System.out.println(a1);
+          System.out.println("<<<< 3.10 >>>>");
+          a1.transfer(0, a2);
+          System.out.println(a1);
+          System.out.println(a2);
+          System.out.println("<<<< 3.12 >>>>");
+          System.out.println(a1.equals(a2));
     }
          /*
        3.1 Create a public class named "Account" in package named "work03".

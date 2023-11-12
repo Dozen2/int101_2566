@@ -4,74 +4,88 @@ import work01.Utilitor;
 import work02.Person;
 
 public class Account {
-    private static long nextNo = 1_000_000_000;
+    private static long nextNo = 100_000_000;
     private final long no;
     private Person owner;
     private double balance;
 
-    public Account(Person owner) {
+    public Account(Person owner)  {
         if (owner == null) {
-            throw new NullPointerException("Owner cannot be null.");
+            throw new NullPointerException();
         }
-        
         this.owner = owner;
-        this.no = Utilitor.computeIsbn10(nextNo);
-        nextNo += 10;
         this.balance = 0.0;
+        long result = 0;
+        while (true) {
+            result = Utilitor.computeIsbn10(Account.nextNo);
+            if (result != 10) {
+                break;
+            }
+            Account.nextNo += 1;
+        }
+        this.no = 10 * Account.nextNo + result;
+        Account.nextNo++;
+
     }
 
     public long getNo() {
-        return no;
+        return this.no;
     }
 
     public Person getOwner() {
-        return owner;
+        return this.owner;
     }
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public double deposit(double amount) {
-        double positiveAmount = Utilitor.testPositive(amount);
-        balance += positiveAmount;
-        return balance;
+        return this.balance += Utilitor.testPositive(amount);
     }
 
     public double withdraw(double amount) {
-        double positiveAmount = Utilitor.testPositive(amount);
-        if (balance >= positiveAmount) {
-            balance -= positiveAmount;
-            return balance;
-        } else {
-            throw new IllegalArgumentException("Insufficient balance to withdraw.");
+        if (amount > this.balance){
+            throw new IllegalArgumentException();
         }
+        this.balance -= Utilitor.testPositive(amount);
+        return this.balance;
     }
 
     public void transfer(double amount, Account account) {
-        if (account == null) {
-            throw new IllegalArgumentException("Target account cannot be null.");
+        if (account == null || amount > this.balance || amount < 0) {
+            throw new IllegalArgumentException();
         }
-        double positiveAmount = Utilitor.testPositive(amount);
-        withdraw(positiveAmount);
-        account.deposit(positiveAmount);
+        this.withdraw(amount);
+        account.deposit(amount);
     }
 
     @Override
     public String toString() {
-        return "Account(" + no + "," + balance + ")";
+        return "Account [no = " + this.no + ", balance = " + this.balance + "]";
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; 
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; 
-        }
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         Account other = (Account) obj;
-        return no == other.no;
+        if (no != other.no)
+            return false;
+        if (owner == null) {
+            if (other.owner != null)
+                return false;
+        } else if (!owner.equals(other.owner))
+            return false;
+        if (Double.doubleToLongBits(balance) != Double.doubleToLongBits(other.balance))
+            return false;
+        return true;
     }
 
 }
+
+
